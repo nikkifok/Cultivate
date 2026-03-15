@@ -1,69 +1,73 @@
-# 🍃 CultivATE — food journal
+# 🍃 CultivATE
 
-A minimal, beautiful calorie & food journal. Data is stored in your browser's localStorage — private to you, no account needed.
+A minimal food journal built around the idea that tracking what you eat shouldn't feel like a second job.
 
----
-
-## Deploy to Vercel (5 minutes)
-
-### Option A — GitHub (recommended, easiest updates)
-
-1. **Create a GitHub account** at github.com if you don't have one
-
-2. **Create a new repository** — click the `+` in the top right → "New repository"
-   - Name it `cultivate` (or anything you like)
-   - Keep it Public or Private, your choice
-   - Click "Create repository"
-
-3. **Upload the files** — on the new repo page, click "uploading an existing file"
-   - Drag the entire `nourish` folder contents in (all files and the `src` folder)
-   - Click "Commit changes"
-
-4. **Deploy on Vercel**
-   - Go to [vercel.com](https://vercel.com) and sign up / log in with GitHub
-   - Click "Add New Project"
-   - Select your `cultivate` repository
-   - Vercel will auto-detect Vite — just click **Deploy**
-   - Done! You'll get a live URL like `nourish.vercel.app`
+Most food tracking apps demand nutritional precision - macros, micros, portion weights down to the gram. CultivATE strips that back to the essentials: what you ate, roughly how much, and how many calories. That's it. No barcode scanner required, no guilt-tripping dashboards, no information overload.
 
 ---
 
-### Option B — Terminal (faster if you're comfortable)
+## What it does
 
+- Log meals across the day — breakfast, lunch, dinner, snacks, or breaking a fast
+- Add food items with a name, rough amount, and calorie estimate
+- Edit or delete individual items after logging
+- Track your daily calories against a personal goal
+- Flip between past days to review your history
+- Data lives in your browser - private by default, no account needed
+
+---
+
+## What it deliberately doesn't do
+
+- No macro tracking
+- No barcode scanning or food databases
+- No streaks, scores, or gamification
+- No notifications
+- No syncing across devices
+
+---
+
+## Running locally
 ```bash
-# 1. Install dependencies
-cd nourish
 npm install
-
-# 2. Test locally (optional)
 npm run dev
-# → open http://localhost:5173
+# Open http://localhost:5173
+```
 
-# 3. Install Vercel CLI and deploy
+---
+
+## Deploying to Vercel
+
+### Via terminal
+```bash
+npm install
 npm install -g vercel
 vercel
 # Follow the prompts — accept all defaults
 # You'll get a live URL at the end
 ```
 
----
+### Via GitHub
 
-## Local use only (no hosting)
-
-```bash
-npm install
-npm run dev
-# Open http://localhost:5173 in your browser
-```
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) and log in with GitHub
+3. Click **Add New Project** → select your repository
+4. Vercel auto-detects Vite — click **Deploy**
+5. Any future push to `main` automatically redeploys
 
 ---
 
-## About
+## Data & privacy
 
-- Data is saved in **localStorage** — it stays in your browser on the device you use
-- No server, no account, no tracking
-- To use on multiple devices, you'd need to export/import data (future feature)
+All data is stored in your browser's `localStorage`. Nothing is sent to a server. There are no accounts, no tracking, no ads.
 
-# CultivATE Food Journal
+The trade-off is that data is tied to the browser and device you use. Clearing your browser's site data will wipe the journal. If you want to back up your entries, export is on the roadmap.
 
-A minimal, beautiful calorie & food journal. Data is stored in your browser's localStorage — private to you, no account needed.
+---
+
+## Stack
+
+- React 18
+- Vite
+- No UI library — all styles are hand-written
+- localStorage for persistence
