@@ -114,20 +114,20 @@ export default function FoodJournal() {
 
   const dayCals = activeDay ? totalCals(activeDay.meals) : 0;
   const pct = Math.min(100, Math.round((dayCals / goalCals) * 100));
-  const ringColor = pct < 60 ? "#a8c5a0" : pct < 90 ? "#d4a96a" : "#c47a6a";
+  const ringColor = pct < 60 ? "#57FFD4" : pct < 90 ? "#C8FF57" : "#FF5C8A";
 
   if (!loaded) return (
-    <div style={{ background: "#1a1610", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <p style={{ color: "#8a7a60", fontFamily: "Georgia, serif", letterSpacing: "0.15em" }}>loading journal…</p>
+    <div style={{ background: "#0A2A2A", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <p style={{ color: "#7ABFB8", fontFamily: "Georgia, serif", letterSpacing: "0.15em" }}>loading journal…</p>
     </div>
   );
 
   return (
     <div style={{
-      background: "#1a1610",
+      background: "#0A2A2A",
       minHeight: "100vh",
       fontFamily: "'Georgia', serif",
-      color: "#e8dcc8",
+      color: "#E8F8F5",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -136,31 +136,32 @@ export default function FoodJournal() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
         * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; }
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #1a1610; }
-        ::-webkit-scrollbar-thumb { background: #3a3020; border-radius: 2px; }
-        .day-pill { cursor: pointer; padding: 6px 14px; border-radius: 20px; border: 1px solid #3a3020; background: transparent; color: #8a7a60; font-family: 'DM Sans', sans-serif; font-size: 12px; transition: all 0.2s; white-space: nowrap; }
-        .day-pill:hover { border-color: #6a5a40; color: #c8b898; }
-        .day-pill.active { background: #3a3020; border-color: #6a5a40; color: #e8dcc8; }
-        .ghost-btn { background: none; border: 1px dashed #3a3020; color: #6a5a40; cursor: pointer; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 6px 14px; transition: all 0.2s; }
-        .ghost-btn:hover { border-color: #8a7a60; color: #a89878; }
-        .del-btn { background: none; border: none; color: #4a3a2a; cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
-        .del-btn:hover { color: #c47a6a; background: #2a1a10; }
-        .input-field { background: #252015; border: 1px solid #3a3020; color: #e8dcc8; border-radius: 6px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; outline: none; transition: border 0.2s; }
-        .input-field:focus { border-color: #8a7a60; }
-        .input-field::placeholder { color: #4a3a2a; }
-        select.input-field option { background: #252015; }
-        .action-btn { background: #3a3020; border: none; color: #e8dcc8; cursor: pointer; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 18px; transition: all 0.2s; }
-        .action-btn:hover { background: #4a4030; }
-        .cancel-btn { background: none; border: 1px solid #3a3020; color: #6a5a40; cursor: pointer; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 18px; transition: all 0.2s; }
-        .cancel-btn:hover { color: #a89878; }
-        .meal-card { background: #201c14; border: 1px solid #2e2818; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; transition: border-color 0.2s; }
-        .meal-card:hover { border-color: #3a3020; }
-        .item-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid #252015; }
+        ::-webkit-scrollbar-track { background: #0A2A2A; }
+        ::-webkit-scrollbar-thumb { background: #164444; border-radius: 2px; }
+        .day-pill { cursor: pointer; padding: 6px 14px; border-radius: 20px; border: 1px solid #164444; background: transparent; color: #7ABFB8; font-family: 'DM Sans', sans-serif; font-size: 12px; transition: all 0.2s; white-space: nowrap; }
+        .day-pill:hover { border-color: #7ABFB8; color: #E8F8F5; }
+        .day-pill.active { background: #164444; border-color: #7ABFB8; color: #E8F8F5; }
+        .ghost-btn { background: none; border: 1px dashed #164444; color: #7ABFB8; cursor: pointer; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 6px 14px; transition: all 0.2s; }
+        .ghost-btn:hover { border-color: #7ABFB8; color: #E8F8F5; }
+        .del-btn { background: none; border: none; color: #164444; cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
+        .del-btn:hover { color: #FF5C8A; background: #0F3535; }
+        .input-field { background: #0F3535; border: 1px solid #164444; color: #E8F8F5; border-radius: 6px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; outline: none; transition: border 0.2s; }
+        .input-field:focus { border-color: #57FFD4; }
+        .input-field::placeholder { color: #164444; }
+        select.input-field option { background: #0F3535; }
+        .action-btn { background: #164444; border: none; color: #E8F8F5; cursor: pointer; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 18px; transition: all 0.2s; }
+        .action-btn:hover { background: #1E5555; }
+        .cancel-btn { background: none; border: 1px solid #164444; color: #7ABFB8; cursor: pointer; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 18px; transition: all 0.2s; }
+        .cancel-btn:hover { color: #E8F8F5; border-color: #7ABFB8; }
+        .meal-card { background: #0F3535; border: 1px solid #164444; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; transition: border-color 0.2s; }
+        .meal-card:hover { border-color: #7ABFB8; }
+        .item-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid #164444; }
         .item-row:last-child { border-bottom: none; }
         @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:translateY(0); } }
         .fade-in { animation: fadeIn 0.3s ease forwards; }
-        .ring-track { fill: none; stroke: #2a2418; stroke-width: 6; }
+        .ring-track { fill: none; stroke: #164444; stroke-width: 6; }
         .ring-fill { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease, stroke 0.4s ease; }
       `}</style>
 
@@ -169,9 +170,9 @@ export default function FoodJournal() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
           <div>
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 400, margin: 0, letterSpacing: "0.02em" }}>
-              Cultiv<span style={{ fontWeight: 700 }}>ATE</span>
+              Cultiv<span style={{ fontWeight: 700, color: "#C8FF57" }}>ATE</span>
             </h1>
-            <p style={{ color: "#5a4a38", fontFamily: "'DM Sans', sans-serif", fontSize: 12, margin: "4px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            <p style={{ color: "#7ABFB8", fontFamily: "'DM Sans', sans-serif", fontSize: 12, margin: "4px 0 0", letterSpacing: "0.08em", textTransform: "uppercase" }}>
               food journal
             </p>
           </div>
@@ -195,7 +196,7 @@ export default function FoodJournal() {
                 {dayCals}
               </div>
               <div
-                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: "#5a4a38", cursor: "pointer", marginTop: 2 }}
+                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: "#7ABFB8", cursor: "pointer", marginTop: 2 }}
                 onClick={() => setEditingGoal(true)}
                 title="Click to edit goal"
               >
@@ -235,8 +236,8 @@ export default function FoodJournal() {
           <button className="ghost-btn" onClick={addNewDay}>+ new day</button>
         </div>
 
-        <div style={{ borderTop: "1px solid #2a2418", paddingTop: 4, marginBottom: 4 }}>
-          <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 13, color: "#5a4a38", margin: "10px 0 18px" }}>
+        <div style={{ borderTop: "1px solid #164444", paddingTop: 4, marginBottom: 4 }}>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 13, color: "#7ABFB8", margin: "10px 0 18px" }}>
             {activeDay ? formatDate(activeDay.date) : "—"}
           </p>
         </div>
@@ -245,7 +246,7 @@ export default function FoodJournal() {
       {/* Meals */}
       <div style={{ width: "100%", maxWidth: 560, padding: "0 24px" }}>
         {activeDay?.meals.length === 0 && (
-          <p style={{ color: "#3a3020", fontFamily: "'DM Sans', sans-serif", fontSize: 13, textAlign: "center", padding: "32px 0" }}>
+          <p style={{ color: "#164444", fontFamily: "'DM Sans', sans-serif", fontSize: 13, textAlign: "center", padding: "32px 0" }}>
             no meals logged yet
           </p>
         )}
@@ -258,13 +259,13 @@ export default function FoodJournal() {
                 <div>
                   <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, fontSize: 14, textTransform: "capitalize" }}>
                     {meal.type === "fast_break" ? "Breaking Fast" : meal.type}
-                    {meal.time && <span style={{ color: "#5a4a38", fontWeight: 400, marginLeft: 8, fontSize: 12 }}>{meal.time}</span>}
+                    {meal.time && <span style={{ color: "#7ABFB8", fontWeight: 400, marginLeft: 8, fontSize: 12 }}>{meal.time}</span>}
                   </div>
-                  {meal.note && <div style={{ color: "#6a5a40", fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 12, marginTop: 2 }}>{meal.note}</div>}
+                  {meal.note && <div style={{ color: "#7ABFB8", fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 12, marginTop: 2 }}>{meal.note}</div>}
                 </div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "#a89878" }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "#57FFD4" }}>
                   {meal.items.reduce((s, i) => s + (Number(i.calories) || 0), 0)} kcal
                 </span>
                 <button className="del-btn" onClick={() => deleteMeal(meal.id)}>×</button>
@@ -274,8 +275,8 @@ export default function FoodJournal() {
             {meal.items.map((item) => (
               <div key={item.id} className="item-row">
                 <span style={{ flex: 1, fontFamily: "'DM Sans', sans-serif", fontSize: 13 }}>{item.name}</span>
-                <span style={{ color: "#5a4a38", fontFamily: "'DM Sans', sans-serif", fontSize: 12, minWidth: 50, textAlign: "right" }}>{item.amount}</span>
-                <span style={{ color: "#a89878", fontFamily: "'DM Sans', sans-serif", fontSize: 13, minWidth: 52, textAlign: "right" }}>{item.calories} kcal</span>
+                <span style={{ color: "#7ABFB8", fontFamily: "'DM Sans', sans-serif", fontSize: 12, minWidth: 50, textAlign: "right" }}>{item.amount}</span>
+                <span style={{ color: "#57FFD4", fontFamily: "'DM Sans', sans-serif", fontSize: 13, minWidth: 52, textAlign: "right" }}>{item.calories} kcal</span>
                 <button className="del-btn" onClick={() => deleteItem(meal.id, item.id)}>×</button>
               </div>
             ))}
@@ -309,7 +310,7 @@ export default function FoodJournal() {
         {/* Add meal form */}
         {showAddMeal ? (
           <div className="fade-in meal-card">
-            <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, fontStyle: "italic", color: "#8a7a60", margin: "0 0 12px" }}>new meal</p>
+            <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, fontStyle: "italic", color: "#7ABFB8", margin: "0 0 12px" }}>new meal</p>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
               <select className="input-field" value={newMeal.type} onChange={(e) => setNewMeal({ ...newMeal, type: e.target.value })} style={{ flex: 1, minWidth: 130 }}>
                 <option value="breakfast">Breakfast</option>
@@ -336,17 +337,17 @@ export default function FoodJournal() {
 
         {/* Daily summary */}
         {activeDay && activeDay.meals.length > 0 && (
-          <div style={{ marginTop: 24, background: "#201c14", border: "1px solid #2e2818", borderRadius: 12, padding: "16px 20px" }}>
-            <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 12, color: "#5a4a38", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+          <div style={{ marginTop: 24, background: "#0F3535", border: "1px solid #164444", borderRadius: 12, padding: "16px 20px" }}>
+            <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: 12, color: "#7ABFB8", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
               daily summary
             </p>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#8a7a60" }}>{activeDay.meals.length} meal{activeDay.meals.length !== 1 ? "s" : ""} logged</span>
-              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: dayCals > goalCals ? "#c47a6a" : "#a8c5a0" }}>
-                {dayCals} <span style={{ fontSize: 13, color: "#5a4a38" }}>kcal</span>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#7ABFB8" }}>{activeDay.meals.length} meal{activeDay.meals.length !== 1 ? "s" : ""} logged</span>
+              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: dayCals > goalCals ? "#FF5C8A" : "#57FFD4" }}>
+                {dayCals} <span style={{ fontSize: 13, color: "#7ABFB8" }}>kcal</span>
               </span>
             </div>
-            <div style={{ marginTop: 10, height: 3, background: "#2a2418", borderRadius: 2, overflow: "hidden" }}>
+            <div style={{ marginTop: 10, height: 3, background: "#164444", borderRadius: 2, overflow: "hidden" }}>
               <div style={{
                 height: "100%", borderRadius: 2, transition: "width 0.6s ease",
                 background: ringColor,
@@ -354,8 +355,8 @@ export default function FoodJournal() {
               }} />
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#3a3020" }}>0</span>
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#3a3020" }}>goal {goalCals}</span>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#164444" }}>0</span>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#164444" }}>goal {goalCals}</span>
             </div>
           </div>
         )}
