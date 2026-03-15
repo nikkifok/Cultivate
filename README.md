@@ -63,3 +63,7 @@ npm run dev
 - Data is saved in **localStorage** — it stays in your browser on the device you use
 - No server, no account, no tracking
 - To use on multiple devices, you'd need to export/import data (future feature)
+
+# CultivATE Food Journal
+
+A minimal, beautiful calorie & food journal. Data is stored in your browser's localStorage — private to you, no account needed.

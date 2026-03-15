@@ -6,10 +6,18 @@ const EMOJI_MAP = {
   breakfast: "🌅", lunch: "☀️", dinner: "🌙", snack: "🍃", fast_break: "⏰", other: "✦"
 };
 
+function getLocalDateString() {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function makeInitialDay() {
   return {
     id: Date.now(),
-    date: new Date().toISOString().split("T")[0],
+    date: getLocalDateString(),
     meals: [],
   };
 }
@@ -20,7 +28,7 @@ function totalCals(meals) {
 
 function formatDate(iso) {
   const d = new Date(iso + "T12:00:00");
-  return d.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" });
+  return d.toLocaleDateString("en-MY", { weekday: "long", day: "numeric", month: "long" });
 }
 
 function loadFromStorage() {
@@ -46,6 +54,7 @@ export default function FoodJournal() {
   const [editValues, setEditValues] = useState({ name: "", amount: "", calories: "" });
   const [newMeal, setNewMeal] = useState({ type: "other", time: "", note: "" });
   const [newItem, setNewItem] = useState({ name: "", amount: "", calories: "" });
+
   const [loaded, setLoaded] = useState(false);
   const [goalCals, setGoalCals] = useState(1800);
   const [editingGoal, setEditingGoal] = useState(false);
@@ -75,7 +84,7 @@ export default function FoodJournal() {
   const activeDay = days.find((d) => d.id === activeDayId);
 
   function addNewDay() {
-    const today = new Date().toISOString().split("T")[0];
+    const today = getLocalDateString(); 
     const exists = days.find((d) => d.date === today);
     if (exists) { setActiveDayId(exists.id); return; }
     const nd = makeInitialDay();
@@ -104,6 +113,20 @@ export default function FoodJournal() {
 
   function deleteMeal(mealId) {
     setDays(days.map((d) => d.id === activeDayId ? { ...d, meals: d.meals.filter((m) => m.id !== mealId) } : d));
+  }
+
+  function updateItem(mealId, itemId) {
+  setDays(days.map((d) =>
+    d.id === activeDayId
+      ? { ...d, meals: d.meals.map((m) =>
+          m.id === mealId
+            ? { ...m, items: m.items.map((i) => i.id === itemId ? { ...i, ...editValues } : i) }
+            : m
+        )}
+      : d
+  ));
+  setEditingItem(null);
+}
   }
 
   function updateItem(mealId, itemId) {
@@ -244,7 +267,7 @@ export default function FoodJournal() {
         <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "16px 0 12px", scrollbarWidth: "none" }}>
           {days.map((d) => (
             <button key={d.id} className={`day-pill ${d.id === activeDayId ? "active" : ""}`} onClick={() => setActiveDayId(d.id)}>
-              {d.date === new Date().toISOString().split("T")[0] ? "Today" : formatDate(d.date).split(",")[0]}
+              {d.date === getLocalDateString() ? "Today" : formatDate(d.date).split(",")[0]}
               <span style={{ marginLeft: 6, color: "#6a5a40" }}>{totalCals(d.meals)}</span>
             </button>
           ))}
@@ -287,34 +310,34 @@ export default function FoodJournal() {
               </div>
             </div>
 
-          {meal.items.map((item) => (
-            <div key={item.id} className="item-row">
-              {editingItem?.itemId === item.id ? (
-              <>
-                <input className="input-field" style={{ flex: 2, minWidth: 120 }} value={editValues.name}
-                  onChange={(e) => setEditValues({ ...editValues, name: e.target.value })} />
-                <input className="input-field" style={{ flex: 1, minWidth: 70 }} value={editValues.amount}
-                  onChange={(e) => setEditValues({ ...editValues, amount: e.target.value })} />
-                <input className="input-field" style={{ flex: 1, minWidth: 60 }} type="number" value={editValues.calories}
-                  onChange={(e) => setEditValues({ ...editValues, calories: e.target.value })} />
-                <button className="action-btn" style={{ padding: "4px 10px" }}
-                  onClick={() => updateItem(meal.id, item.id)}>✓</button>
-                <button className="del-btn" onClick={() => setEditingItem(null)}>×</button>
+            {meal.items.map((item) => (
+              <div key={item.id} className="item-row">
+                {editingItem?.itemId === item.id ? (
+                  <>
+                    <input className="input-field" style={{ flex: 2, minWidth: 120 }} value={editValues.name}
+                      onChange={(e) => setEditValues({ ...editValues, name: e.target.value })} />
+                    <input className="input-field" style={{ flex: 1, minWidth: 70 }} value={editValues.amount}
+                      onChange={(e) => setEditValues({ ...editValues, amount: e.target.value })} />
+                    <input className="input-field" style={{ flex: 1, minWidth: 60 }} type="number" value={editValues.calories}
+                      onChange={(e) => setEditValues({ ...editValues, calories: e.target.value })} />
+                    <button className="action-btn" style={{ padding: "4px 10px" }}
+                      onClick={() => updateItem(meal.id, item.id)}>✓</button>
+                    <button className="del-btn" onClick={() => setEditingItem(null)}>×</button>
+                  </>
+                ) : (
+                  <>
+                <span style={{ flex: 1, fontFamily: "'DM Sans', sans-serif", fontSize: 13 }}>{item.name}</span>
+                <span style={{ color: "#7ABFB8", fontFamily: "'DM Sans', sans-serif", fontSize: 12, minWidth: 50, textAlign: "right" }}>{item.amount}</span>
+                <span style={{ color: "#57FFD4", fontFamily: "'DM Sans', sans-serif", fontSize: 13, minWidth: 52, textAlign: "right" }}>{item.calories} kcal</span>
+                <button className="del-btn" onClick={() => {
+                    setEditingItem({ mealId: meal.id, itemId: item.id });
+                    setEditValues({ name: item.name, amount: item.amount, calories: item.calories });
+                  }}>✎</button>
+                <button className="del-btn" onClick={() => deleteItem(meal.id, item.id)}>×</button>
               </>
-            ) : (
-        <>
-        <span style={{ flex: 1, fontFamily: "'DM Sans', sans-serif", fontSize: 13 }}>{item.name}</span>
-        <span style={{ color: "#7ABFB8", fontFamily: "'DM Sans', sans-serif", fontSize: 12, minWidth: 50, textAlign: "right" }}>{item.amount}</span>
-        <span style={{ color: "#57FFD4", fontFamily: "'DM Sans', sans-serif", fontSize: 13, minWidth: 52, textAlign: "right" }}>{item.calories} kcal</span>
-        <button className="del-btn" onClick={() => {
-          setEditingItem({ mealId: meal.id, itemId: item.id });
-          setEditValues({ name: item.name, amount: item.amount, calories: item.calories });
-        }}>✎</button>
-        <button className="del-btn" onClick={() => deleteItem(meal.id, item.id)}>×</button>
-      </>
-    )}
-  </div>
-))}
+            )}
+          </div>
+        ))}
 
             {showAddItem === meal.id ? (
               <div className="fade-in" style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
@@ -398,4 +421,4 @@ export default function FoodJournal() {
       </div>
     </div>
   );
-}
+
