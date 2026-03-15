@@ -160,7 +160,7 @@ export default function FoodJournal() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
         * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; }
+        body { margin: 0; padding: 0; background: #0A2A2A; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0A2A2A; }
         ::-webkit-scrollbar-thumb { background: #164444; border-radius: 2px; }
