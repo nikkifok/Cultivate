@@ -280,17 +280,8 @@ export default function FoodJournal() {
                 <button className="del-btn" onClick={() => deleteItem(meal.id, item.id)}>×</button>
               </div>
             ))}
-
-            {showAddItem === meal.id ? (
-              <div className="fade-in" style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <input className="input-field" style={{ flex: 2, minWidth: 140 }} placeholder="food name" value={newItem.name}
-                    onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-                    onKeyDown={(e) => e.key === "Enter" && addItem(meal.id)} />
-                  <input className="input-field" style={{ flex: 1, minWidth: 80 }} placeholder="amount" value={newItem.amount}
-                    onChange={(e) => setNewItem({ ...newItem, amount: e.target.value })} />
-                  <input className="input-field" style={{ flex: 1, minWidth: 70 }} type="number" placeholder="kcal" value={newItem.calories}
-                    onChange={(e) => setNewItem({ ...newItem, calories: e.target.value })}
+   ))}
+ e.target.value })}
                     onKeyDown={(e) => e.key === "Enter" && addItem(meal.id)} />
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
